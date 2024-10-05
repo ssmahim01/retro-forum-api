@@ -20,6 +20,10 @@ const loadLatestPosts = async(latest) => {
 const displayAllPosts = (posts) => {
     const postContainer = document.getElementById('post-container');
 
+    let loader = document.getElementById('postLoader');
+
+   setTimeout(() => {
+    loader.classList.add('hidden');
     posts.forEach(post => {
         const newDiv = document.createElement('div');
 
@@ -68,15 +72,21 @@ const displayAllPosts = (posts) => {
         `
         postContainer.appendChild(newDiv);
     });
+   }, 3000);
+
+   loader.classList.remove('hidden');
+
 };
 
 /* Display latest Posts */
 
 const displayLatestPosts = (latestPosts) => {
     const latestContainer = document.getElementById('latest-post-container');
-    latestPosts.forEach(post => {
-        const blockElement = document.createElement('div');
-       
+    let postLoader = document.getElementById('latestPostLoader');
+    setTimeout(() => {
+        postLoader.classList.add('hidden');
+           latestPosts.forEach(post => {
+               const blockElement = document.createElement('div');
         blockElement.innerHTML = `
         <div class="card lg:w-96 pb-5 shadow-2xl bg-slate-100">
           <figure class="lg:px-6 px-4 pt-4 lg:pt-8">
@@ -108,9 +118,12 @@ const displayLatestPosts = (latestPosts) => {
               <p class="text-start opacity-60">${post.author?.designation || "Unknown"}</p>
           </div>
       </div>
-        `
-        latestContainer.appendChild(blockElement);
-    });
+      `
+      latestContainer.appendChild(blockElement);
+  });
+       }, 6000);
+       
+       postLoader.classList.remove('hidden');
 };
 
 const markAsRead = (description, view_count) => {
